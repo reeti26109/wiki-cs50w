@@ -1,0 +1,47 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="{% static 'encyclopedia/styles.css' %}" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        <div class="row">
+            <div class="sidebar d-flex flex-column" id="side">
+
+                <img src="static/encyclopedia/wiki.png" class="img-thumbnail">
+               
+                <form action="{% url 'search' %}">
+                    <div class="form-group form-group-icon mb-3">
+                        <input id="search" class="search form-control form-control-placeholdericon" type="text" name="q" placeholder="&#xF002; Search Encyclopedia">
+                    </div>
+                </form>
+                
+                <div>
+                    <a href="{% url 'index' %}" class="active">Home</a>
+                </div>
+                <div>
+                    <a href="#">Create New Page</a>
+                </div>
+                <div>
+                    <a href="#">Random Page</a>
+                </div>
+                {% block nav %}
+                {% endblock %}
+            </div>
+            <div class="main flex-fill d-flex flex-column" id="mainpage">
+                {% block body %}
+                {% endblock %}
+            </div>
+        </div>
+
+    </body>
+</html>
+
+<!-- col-lg-10 col-md-9 col-sm-12 -->
+
+<!-- col-lg-2 col-md-3 col-sm-12 -->
