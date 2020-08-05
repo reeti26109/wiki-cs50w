@@ -15,7 +15,8 @@
 
                 <img src="static/encyclopedia/wiki.png" class="img-thumbnail">
                
-                <form action="{% url 'search' %}">
+                <form action="{% url 'search' %}" method="POST">
+                    {% csrf_token %}
                     <div class="form-group form-group-icon mb-3">
                         <input id="search" class="search form-control form-control-placeholdericon" type="text" name="q" placeholder="&#xF002; Search Encyclopedia">
                     </div>

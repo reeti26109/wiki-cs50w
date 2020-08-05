@@ -25,5 +25,34 @@ def page(request, title):
     else:
         return render(request, "encyclopedia/error.html")
 
-# def search(request):
-    
+def search(request):
+    title= request.POST["q"]
+    entries= util.list_entries()
+    flag=0
+    new=[]
+    for entry in entries:
+
+        if (title == entry):
+            flag=1
+            Entry=util.get_entry(title)
+            Entry= markdown2.markdown(Entry)
+
+            context={
+                "entry": Entry,
+                "title": title
+            }
+            return render(request, "encyclopedia/page.html",context)
+    if(flag==0):
+        for entry in entries:
+            s1=title.lower()
+            s2=entry.lower()
+            if(s2.find(s1)!=-1):
+                new.append(entry)
+        if len(new)==0:
+            return render(request,"encyclopedia/error.html")
+        else:
+            return render(request, "encyclopedia/search.html", {
+            "entries": new
+            })    
+        
+
