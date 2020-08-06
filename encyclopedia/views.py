@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render,HttpResponseRedirect
+from django.contrib import messages
+from django.urls import reverse
 
 from . import util
 
@@ -24,6 +26,7 @@ def page(request, title):
 
     else:
         return render(request, "encyclopedia/error.html")
+        
 
 def search(request):
     title= request.POST["q"]
@@ -31,7 +34,8 @@ def search(request):
     flag=0
     new=[]
     for entry in entries:
-
+        title=title.lower()
+        entry=entry.lower()
         if (title == entry):
             flag=1
             Entry=util.get_entry(title)
@@ -53,6 +57,26 @@ def search(request):
         else:
             return render(request, "encyclopedia/search.html", {
             "entries": new
-            })    
+            })   
+
+
+def create(request):
+    return render(request, "encyclopedia/new.html") 
+
+
+def save(request):
+    title=request.POST["q1"]
+    text=request.POST["q2"]
+    if util.get_entry(title):
+        messages.error(request, 'Page with this title already exists!')
+        return render(request, "encyclopedia/new.html")
+    else:
+        util.save_entry(title,text)
+        return HttpResponseRedirect(reverse('page'), title=title)
+
+
+
+    
+
         
 

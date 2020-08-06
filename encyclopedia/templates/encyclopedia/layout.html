@@ -26,7 +26,7 @@
                     <a href="{% url 'index' %}" class="active">Home</a>
                 </div>
                 <div>
-                    <a href="#">Create New Page</a>
+                    <a href="{% url 'create' %}">Create New Page</a>
                 </div>
                 <div>
                     <a href="#">Random Page</a>
@@ -35,6 +35,14 @@
                 {% endblock %}
             </div>
             <div class="main flex-fill d-flex flex-column" id="mainpage">
+                {% if messages %}
+                <div class="alert alert-warning border text-center" role="alert">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {% for message in messages %}
+                    {{ message }}
+                    {% endfor %}
+                </div>
+                {% endif %}
                 {% block body %}
                 {% endblock %}
             </div>

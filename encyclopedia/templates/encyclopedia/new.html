@@ -1,0 +1,24 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Encyclopedia:Create
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Create a new page</h1>
+        <form action="{% url 'save' %}" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="newtitle">Title:</label>
+                <input type="text" class="form-control" id="newtitle" placeholder="Enter title" name="q1"></input>
+            </div>
+            <div class="form-group">
+                <label for="newcontent">Content:</label>
+                <textarea id="newcontent" class="form-control" placeholder="Enter content" name="q2"></textarea>
+            </div>
+            <p><strong>Note: </strong>Enter the content in markdown syntax.</p>
+            <button type="submit" class="btn btn-info" style="position: center;">Save</button>
+        </form>
+    </div>
+{% endblock %}

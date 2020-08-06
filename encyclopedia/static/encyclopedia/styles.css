@@ -86,4 +86,14 @@ textarea {
     font-family: Roboto, FontAwesome, 'Material Icons';
 }
 
+#newtitle{
+    width:40vw;
+}
+
+#newcontent{
+    width: 40vw;
+    height: 40vh;
+    overflow: auto;
+}
+
 
