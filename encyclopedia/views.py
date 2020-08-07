@@ -4,6 +4,7 @@ from django.urls import reverse
 
 from . import util
 
+from random import randint
 import markdown2
 
 def index(request):
@@ -89,6 +90,13 @@ def edited(request,title):
     util.save_entry(title,content)
     return redirect('page',title=title)
     # HttpResponseRedirect(reverse('page'), title=title)
+
+
+def random(request):
+    entries= util.list_entries()
+    l=len(entries)
+    i=randint(0,l-1)
+    return redirect('page', title=entries[i])
 
 
 
