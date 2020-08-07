@@ -1,4 +1,4 @@
-from django.shortcuts import render,HttpResponseRedirect
+from django.shortcuts import render,HttpResponseRedirect,redirect
 from django.contrib import messages
 from django.urls import reverse
 
@@ -72,7 +72,24 @@ def save(request):
         return render(request, "encyclopedia/new.html")
     else:
         util.save_entry(title,text)
-        return HttpResponseRedirect(reverse('page'), title=title)
+        return redirect('page',title=title)
+        # HttpResponseRedirect(reverse('page'), title=title)
+
+
+def edit(request,title):
+    return render(request, "encyclopedia/edit.html",{
+        "title":title.capitalize(),
+        "content":util.get_entry(title)
+        })
+
+
+def edited(request,title):
+    title=title.capitalize()
+    content=request.POST["q4"]
+    util.save_entry(title,content)
+    return redirect('page',title=title)
+    # HttpResponseRedirect(reverse('page'), title=title)
+
 
 
 

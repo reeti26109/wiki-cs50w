@@ -96,4 +96,15 @@ textarea {
     overflow: auto;
 }
 
+button{
+    width: 100px;
+}
 
+#edittitle{
+    width:40vw;
+}
+
+#editcontent{
+    width: 40vw;
+    height: 40vh;
+    overflow: auto;
